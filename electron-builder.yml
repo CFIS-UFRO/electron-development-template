@@ -1,5 +1,5 @@
-appId: com.electron.app
-productName: electron-development-template
+appId: com.cfis.electron-development-template
+productName: Electron Development Template
 directories:
   buildResources: build
 files:
@@ -11,9 +11,9 @@ files:
 asarUnpack:
   - resources/**
 win:
-  executableName: electron-development-template
+  executableName: ${name}
 nsis:
-  artifactName: ${name}-${version}-setup.${ext}
+  artifactName: ${name}-${version}-${arch}-setup.${ext}
   shortcutName: ${productName}
   uninstallDisplayName: ${productName}
   createDesktopShortcut: always
@@ -26,17 +26,14 @@ mac:
     - NSDownloadsFolderUsageDescription: Application requests access to the user's Downloads folder.
   notarize: false
 dmg:
-  artifactName: ${name}-${version}.${ext}
+  artifactName: ${name}-${version}-${arch}.${ext}
 linux:
   target:
     - AppImage
     - snap
     - deb
-  maintainer: electronjs.org
   category: Utility
+  artifactName: ${name}-${version}-${arch}.${ext}
 appImage:
-  artifactName: ${name}-${version}.${ext}
+  artifactName: ${name}-${version}-${arch}.${ext}
 npmRebuild: false
-publish:
-  provider: generic
-  url: https://example.com/auto-updates
