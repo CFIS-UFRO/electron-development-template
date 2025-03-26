@@ -36,25 +36,14 @@ jobs:
         run: npm run build:mac
         
       - name: Build for Linux
-        if: startsWith(matrix.os, 'ubuntu') && matrix.os != 'ubuntu-24.04-arm'
+        if: startsWith(matrix.os, 'ubuntu')
         run: npm run build:linux
-
-      - name: Build for Linux ARM
-        if: matrix.os == 'ubuntu-24.04-arm'
-        run: npm run build:arm
 
       - name: Upload artifacts
         uses: actions/upload-artifact@v4
         with:
           name: ${{ matrix.os }}-build
-          path: |
-            dist/*.exe
-            dist/*.dmg
-            dist/*.AppImage
-            dist/*.snap
-            dist/*.deb
-            dist/*.zip
-            dist/latest*.yml
+          path: dist/*.zip
           if-no-files-found: error
             
   release:

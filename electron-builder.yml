@@ -11,30 +11,29 @@ files:
   - '!{.env,.env.*,.npmrc,pnpm-lock.yaml}'
 asarUnpack:
   - resources/**
+
 win:
   executableName: electron-development-template
-nsis:
-  artifactName: ${name}-${version}-${arch}-setup.${ext}
-  shortcutName: ${productName}
-  uninstallDisplayName: ${productName}
-  createDesktopShortcut: always
+  target:
+    - zip
+  artifactName: ${name}-${version}-${arch}-${platform}.${ext}
+
 mac:
   entitlementsInherit: build/entitlements.mac.plist
   extendInfo:
-    - NSCameraUsageDescription: Application requests access to the device's camera.
-    - NSMicrophoneUsageDescription: Application requests access to the device's microphone.
-    - NSDocumentsFolderUsageDescription: Application requests access to the user's Documents folder.
-    - NSDownloadsFolderUsageDescription: Application requests access to the user's Downloads folder.
+    NSCameraUsageDescription: Application requests access to the device's camera.
+    NSMicrophoneUsageDescription: Application requests access to the device's microphone.
+    NSDocumentsFolderUsageDescription: Application requests access to the user's Documents folder.
+    NSDownloadsFolderUsageDescription: Application requests access to the user's Downloads folder.
   notarize: false
-dmg:
-  artifactName: ${name}-${version}-${arch}.${ext}
-linux:
   target:
-    - AppImage
-    - snap
-    - deb
+    - zip
+  artifactName: ${name}-${version}-${arch}-${platform}.${ext}
+
+linux:
   category: Utility
-  artifactName: ${name}-${version}-${arch}.${ext}
-appImage:
-  artifactName: ${name}-${version}-${arch}.${ext}
+  target:
+    - zip
+  artifactName: ${name}-${version}-${arch}-${platform}.${ext}
+
 npmRebuild: false

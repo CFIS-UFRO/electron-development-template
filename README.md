@@ -71,12 +71,14 @@ Electron addresses these challenges by leveraging the strengths of web technolog
 
 ```json
 {
-  "name": "your-app-name",              // Use kebab-case for the package name
-  "appName": "Your Application Name",   // User-friendly name
-  "description": "Brief description of your application",
-  "author": "Jane Doe <jane@example.com>, John Smith <john@example.com>", // Authors
-  "port": 3000,                          // Port for the API server
-  "repository": "https://github.com/yourusername/your-repo",  // Your code repository
+   "name": "your-app-name",              // Use kebab-case for the package name
+   "appName": "Your Application Name",   // User-friendly name
+   "description": "Brief description of your application",
+   "author": "Jane Doe <jane@example.com>, John Smith <john@example.com>", // Authors
+   "port": 3000,                          // Port for the API server
+   "repository": "https://github.com/yourusername/your-repo",  // Your code repository
+   "versions_repository": "https://github.com/yourusername/your-repo" // Versions repository, can be the same as "repository", must be public, for CFIS use: https://github.com/CFIS-UFRO/versions
+
 }
 ```
 6. Modify the following fields in `electron-builder.yml`:
@@ -84,8 +86,6 @@ Electron addresses these challenges by leveraging the strengths of web technolog
 ```yaml
 addId: com.example.yourappname     # Change to your domain and app name
 productName: Your Application Name # User-friendly name
-win:
-   executableName: yourappname     # Change to your app name in kebab-case (for macOS and Linux it is automatically generated)
 ```
 7. If you will use the `publish` script (see next section), and the repository is private, remove `ubuntu-24.04-arm` from the file `.github/workflows/release.yml`, it is not supported by GitHub Actions for private repositories.
 8. Install dependencies: `npm install`
@@ -115,6 +115,7 @@ The `publish` script automates the process with the following steps:
    (where X is the release number for the current day, starting at 0)
 2. Generates a GitHub tag for the new version
 3. Pushes the changes to the repository
+4. Add the version to the `versions` repository
 
 To run it, use the following command:
 
@@ -123,3 +124,13 @@ npm run publish
 ```
 
 This will trigger the GitHub Actions workflow to build and publish the release with executables for all platforms.
+
+### Prerequisites for Publishing
+
+1. The project must be hosted on GitHub
+2. The `repository` field in `package.json` must be defined
+3. Optionally, the `versions_repository` field can be defined to store version information (for CFIS projects, use: "https://github.com/CFIS-UFRO/versions").
+4. If the versions repository is defined, additionally you need to set up a GitHub token with write access to the versions repository in an `.env` file:
+    ```bash
+    GITHUB_TOKEN=your_github_personal_access_token
+    ```

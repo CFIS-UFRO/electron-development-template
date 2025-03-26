@@ -6,6 +6,7 @@
   "author": "Bryan Casanelli <bryancasanelli@gmail.com>",
   "port": 9826,
   "repository": "https://github.com/CFIS-UFRO/electron-development-template-2",
+  "versions_repository": "https://github.com/CFIS-UFRO/versions",
   "version": "2025.3.26.8",
   "scripts": {
     "format": "prettier --plugin prettier-plugin-svelte --write .",
@@ -15,11 +16,10 @@
     "build": "electron-vite build",
     "postinstall": "electron-builder install-app-deps",
     "build:unpack": "npm run build && electron-builder --dir",
-    "build:win": "npm run build && electron-builder --win --publish never",
-    "build:mac": "npm run build && electron-builder --mac --publish never",
-    "build:linux": "npm run build && electron-builder --linux --publish never",
-    "build:arm": "npm run build && electron-builder --linux zip --publish never",
-    "publish": "node scripts/publish.js && git push && git push --tags"
+    "build:win": "npm run build && electron-builder --win zip --publish never",
+    "build:mac": "npm run build && electron-builder --mac zip --publish never",
+    "build:linux": "npm run build && electron-builder --linux zip --publish never",
+    "publish": "node -r dotenv/config scripts/publish.js && git push && git push --tags"
   },
   "dependencies": {
     "@electron-toolkit/preload": "^3.0.1",
