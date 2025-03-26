@@ -6,41 +6,45 @@ Template to develop GUI applications based on Electron.
 
 You can find the latest releases [here](https://github.com/CFIS-UFRO/electron-development-template/releases).
 
-## Important note for Mac users
+## Mac Security Warning
 
-If you are using macOS, you may encounter a security warning when opening the application for the first time. This warning is due to the application being from an unidentified developer. To bypass this warning, you need to open the terminal and run the following command:
+When first opening the app on macOS, you may see a security warning. To resolve this:
 
-```bash
-xattr -d com.apple.quarantine /path/to/your/application.app
-```
+1. Open Terminal
+2. Run: `xattr -d com.apple.quarantine /path/to/app.app`
+   - Or type `xattr -d com.apple.quarantine ` and drag the app into Terminal
 
-where `/path/to/your/application.app` is the path to the application on your system.
-
-Alternatively, you can  write `xattr -d com.apple.quarantine ` and drag the application into the terminal window, this will automatically fill the path.
+This removes the quarantine flag that blocks unidentified developer apps.
 
 # Origin of this Template
 
-At our laboratory (CFIS), we often need to develop graphical applications for hardware control or data analysis. Many of these applications share common elements, so we decided to create a reusable template to streamline development. Until now, we have used Python with QT. However, as explained in the next section, Electron offers several advantages for our needs, which led us to develop this template based on Electron.
+This template was created to streamline development of scientific applications for hardware control and data analysis. While we previously used Python with QT, we've transitioned to Electron for its improved performance, visualization capabilities, and easier distribution.
 
 # What is Electron?
 
-Electron is a framework that allows you to build cross-platform desktop applications using web technologies: HTML, CSS, and JavaScript. Essentially, it embeds a Chromium browser (the engine behind Google Chrome) and Node.js into a single runtime, enabling you to create desktop apps that work on Windows, macOS, and Linux.
+Electron is a framework for building cross-platform desktop applications with web technologies (HTML, CSS, JavaScript). It combines Chromium for rendering and Node.js for backend capabilities, enabling native desktop apps that run on Windows, macOS, and Linux. This makes it ideal for creating powerful applications with modern web interfaces and native system access.
 
 ## Why Electron over Python?
 
-While Python offers a relatively gentle learning curve and is excellent for data processing and scripting, and QT enables the creation of robust desktop interfaces, we've encountered some limitations:
+While Python with QT is popular for desktop apps, it has significant drawbacks:
 
-* Performance: Python can exhibit some performance constraints, especially when dealing with computationally intensive tasks or real-time data visualization.
-* Visualization: While libraries like QT are capable, they often fall short when compared to the performance and rich graphical element ecosystem available in modern web development frameworks.
-* Distribution: Distributing Python applications can present some challenges, often involving guiding end-users through Python installation and dependency management, which can be a barrier for non-technical users.
+* Performance bottlenecks with intensive computations and real-time visualization
+* Limited modern UI capabilities compared to web technologies 
+* Complex distribution requiring Python installation and dependency management
+* Cross-platform inconsistencies in UI rendering and behavior
 
-Electron addresses these challenges by leveraging the strengths of web technologies:
+Electron solves these issues by:
 
-* Visual Capabilities: HTML, CSS, and JavaScript have evolved to excel at visual presentation, making them ideal for complex data visualization, real-time graphs, and interactive interfaces – common requirements in scientific environments.
-* Ease of Distribution: Electron applications can be packaged into self-contained executables, simplifying distribution and installation for end-users. No need to worry about Python installations or dependency conflicts.
-* Cross-Platform Compatibility: Electron's cross-platform nature allows you to build applications that run seamlessly on multiple operating systems from a single codebase.
+* Utilizing powerful web technologies (HTML/CSS/JavaScript) for better visualization
+* Providing self-contained executables that don't need runtime installation
+* Ensuring consistent behavior across Windows, macOS, and Linux
+* Offering superior performance for UI-heavy applications such as data visualization
+
+The combination of Chromium and Node.js in Electron delivers a more robust solution for modern desktop applications compared to Python-based alternatives.
 
 # Repository Structure
+
+Key repository directories:
 
 ```
 /
@@ -48,98 +52,123 @@ Electron addresses these challenges by leveraging the strengths of web technolog
 │   ├── main/                # Main process (Electron backend)
 │   ├── preload/             # Preload scripts (communication bridge)
 │   └── renderer/            # Renderer process (Svelte frontend)
-│       ├── src/             # Frontend application code
-│       ├── assets/          # Frontend static assets
-│       ├── components/      # Reusable UI components
-│       ├── App.svelte       # Main Svelte component
-│       ├── main.js          # Frontend entry point
-│       └── index.html       # HTML template
-├── resources/               # Application resources and assets
-├── electron.vite.config.mjs # Electron-Vite configuration
-├── svelte.config.mjs        # Svelte configuration
+├── resources/               # Application resources
 ├── package.json             # Project dependencies and scripts
 └── README.md                # Project documentation
 ```
 
 # Getting Started
 
-1. Make sure you have Node.js and git installed.
-2. Generate a new repository from this template through GitHub: Use this template -> Create a new repository.
-3. Clone your repository.
-4. Copy your icon file in `.png` format to the `resources` folder and name it `icon.png`.
-5. Modify the following fields in `package.json`:
+1. Make sure you have [Node.js](https://nodejs.org/) (v18+) and [Git](https://git-scm.com/) installed.
+2. Generate a new repository from this template through GitHub:
+   - Click "Use this template" -> "Create a new repository"
+   - Or manually clone/download the template
+3. Clone your new repository locally
+4. Set up your application icon:
+   - Place a PNG image file in the `resources` folder
+   - Name it `icon.png` (must be PNG format)
+5. Configure application details in `package.json`:
 
 ```json
 {
-   "name": "your-app-name",              // Use kebab-case for the package name
-   "appName": "Your Application Name",   // User-friendly name
-   "description": "Brief description of your application",
-   "author": "Jane Doe <jane@example.com>, John Smith <john@example.com>", // Authors
-   "port": 3000,                          // Port for the API server
-   "repository": "https://github.com/yourusername/your-repo",  // Your code repository
-   "versions_repository": "https://github.com/yourusername/your-repo" // Versions repository, can be the same as "repository", must be public, for CFIS use: https://github.com/CFIS-UFRO/versions
-
+   "name": "your-app-name",               // Lowercase with hyphens only
+   "appName": "Your Application Name",    // Display name
+   "description": "Brief description",    // What your app does
+   "author": "Name <email@domain.com>",   // Your contact info (multiple authors can be added separated by comma)
+   "version": "YYYY.MM.DD.0",             // Version of the app, auto-updated by the publish script
+   "port": 3000,                          // Port for the app API
+   "repository": "https://github.com/username/repo",         // Your code repository
+   "versions_repository": "https://github.com/username/repo" // For updates checking, can be the same as repository
 }
 ```
-6. Modify the following fields in `electron-builder.yml`:
+
+6. Update application identifiers in `electron-builder.yml`:
 
 ```yaml
-addId: com.example.yourappname     # Change to your domain and app name
-productName: Your Application Name # User-friendly name
+appId: com.yourdomain.appname      # Unique app identifier, example: com.github.myusername.myapp
 ```
-7. If you will use the `publish` script (see next section), and the repository is private, remove `ubuntu-24.04-arm` from the file `.github/workflows/release.yml`, it is not supported by GitHub Actions for private repositories.
-8. Install dependencies: `npm install`
-9. Start the application: `npm run start`
+
+7. For private repositories:
+   - Open `.github/workflows/release.yml`
+   - Remove `ubuntu-24.04-arm` from the build matrix (not supported for private repos)
+
+8. Set up development environment:
+   ```bash
+   npm install    # Install dependencies
+   npm run dev    # Start in development mode with hot reload
+   ```
+
+9. For production testing:
+   ```bash
+   npm run start # Start the app in production mode
+   ```
+
+10. Optional: If using a versions repository:
+    - Create a `.env` file in the project root
+    - Add a GitHub token with read and write access to the versions repository:
+      ```bash
+      GITHUB_TOKEN=your_github_personal_access_token
+      ```
 
 # Building and Publishing
 
-## Build Options
+## Build Process
 
-You have the following commands to build the app:
+Build the application for different platforms using these commands:
 
 ```bash
-npm run build:mac     # Build the app for macOS
-npm run build:win     # Build the app for Windows
-npm run build:linux   # Build the app for Linux
+npm run build:mac     # macOS build
+npm run build:win     # Windows build  
+npm run build:linux   # Linux build
 ```
 
-Although you can build the app for any specific platform, better results are obtained if you compile for your own platform. 
+For best results, build for your own platform. 
 
-## Publishing a Github Release
+## GitHub Release Publishing
 
-The template uses GitHub Actions to automate the build and release process. When you push a new tag starting by `v` to the repository, the workflow will automatically build the application for all platforms and publish the release assets in Github Releases.
+The template includes automated releases via GitHub Actions.
 
-The `publish` script automates the process with the following steps:
+When you push a tag starting with `v`, GitHub Actions automatically:
+1. Builds the app for all platforms
+2. Creates a GitHub release
+3. Uploads build artifacts
 
-1. Increments the version number in `package.json` using the format `YYYY.MM.DD.X` 
-   (where X is the release number for the current day, starting at 0)
-2. Generates a GitHub tag for the new version
-3. Pushes the changes to the repository
-4. Add the version to the `versions` repository
+### Using the Publish Script
 
-To run it, use the following command:
+Run the automated publish process with:
 
 ```bash
 npm run publish
 ```
 
-This will trigger the GitHub Actions workflow to build and publish the release with executables for all platforms.
+This script:
+1. Updates version in `package.json` (format: `YYYY.MM.DD.X`)
+2. Creates a Git tag
+3. Pushes to GitHub
+4. Updates the versions repository
+5. Triggers the build workflow
 
-### Prerequisites for Publishing
+### Publishing Requirements
 
-1. The project must be hosted on GitHub
-2. The `repository` field in `package.json` must be defined
-3. Optionally, the `versions_repository` field can be defined to store version information (for CFIS projects, use: "https://github.com/CFIS-UFRO/versions").
-4. If the versions repository is defined, additionally you need to set up a GitHub token with write access to the versions repository in an `.env` file:
-    ```bash
-    GITHUB_TOKEN=your_github_personal_access_token
-    ```
+1. GitHub-hosted repository
+2. Configured `repository` field in `package.json`
+3. Optional: Set `versions_repository` for version tracking
+4. If version tracking is enabled add a GitHub token with read and write access to the versions repository:
+   ```
+   GITHUB_TOKEN=your_github_personal_access_token
+   ```
 
 # Template Features
 
-## Icon
+## Application icon
 
-To configure the application icon, replace the `icon.png` file in the `resources` folder. 
+To set your application icon:
+
+1. Place a PNG file named `icon.png` in the `resources` folder
+2. The icon will be used when building the application
+3. During development, the default Electron icon will be shown
+
+**Note:** The icon must be in PNG format.
 
 ## Update Checking
 
@@ -150,6 +179,6 @@ The template includes an automatic update checking system that works as follows:
 3. If an update is available, a popup notification appears informing the user
 4. The popup provides a link that redirects the user to the GitHub releases page
 
-**Note:** Automatic updates that download and install without user intervention are not yet supported. Users must manually download the new version from the releases page.
+**Note:** The update system currently provides notification-only functionality. When a new version is detected, users will be notified and directed to manually download and install from the releases page. Automatic background updates are not supported.
 
 To disable update checking, set the `versions_repository` or `repository` field in `package.json` to `null`.
