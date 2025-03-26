@@ -6,7 +6,7 @@
   "author": "Bryan Casanelli <bryancasanelli@gmail.com>",
   "port": 9826,
   "repository": "https://github.com/CFIS-UFRO/electron-development-template-2",
-  "version": "2025.3.26.7",
+  "version": "2025.3.26.8",
   "scripts": {
     "format": "prettier --plugin prettier-plugin-svelte --write .",
     "lint": "eslint --cache .",
