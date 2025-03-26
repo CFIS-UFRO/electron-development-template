@@ -182,3 +182,26 @@ The template includes an automatic update checking system that works as follows:
 **Note:** The update system currently provides notification-only functionality. When a new version is detected, users will be notified and directed to manually download and install from the releases page. Automatic background updates are not supported.
 
 To disable update checking, set the `versions_repository` or `repository` field in `package.json` to `null`.
+
+## Logging System
+
+The template includes a pre-configured logging system using `electron-log`:
+
+- **Main Process**: 
+  ```javascript
+  import log from 'electron-log';
+  
+  log.info('Server message');
+  log.error('Something went wrong');
+  ```
+
+- **Renderer Process**:
+  ```javascript
+   import log from 'electron-log/renderer';
+   log.info('Log from the renderer process');
+  ```
+
+Logs are automatically saved to:
+- Windows: `%USERPROFILE%\AppData\Roaming\[app name]\logs\`
+- macOS: `~/Library/Logs/[app name]/`
+- Linux: `~/.config/[app name]/logs/`
