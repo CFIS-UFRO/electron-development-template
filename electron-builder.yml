@@ -1,5 +1,4 @@
-appId: com.cfis.electron-development-template
-productName: Electron Development Template
+appId: com.github.cfis-ufro.electron-development-template
 icon: resources/icon.png
 directories:
   buildResources: build
@@ -13,7 +12,6 @@ asarUnpack:
   - resources/**
 
 win:
-  executableName: electron-development-template
   target:
     - zip
   artifactName: ${name}-${version}-${arch}-${platform}.${ext}
