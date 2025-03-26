@@ -4,6 +4,9 @@ import { electronApp, optimizer, is } from '@electron-toolkit/utils'
 import icon from '../../resources/icon.png?asset'
 import log from 'electron-log'
 import { LOG_FILE_DIR, CACHE_FOLDER_DIR, USER_DATA_FILE_DIR } from './utils/paths.js';
+import { createMenu } from './menu.js';
+import { initializeLanguage } from './utils/lang.js'
+import { initializeTheme } from './utils/theme.js'
 
 // Configure logging
 log.errorHandler.startCatching();
@@ -15,6 +18,12 @@ log.info('Starting the app...');
 log.info('Log file:', LOG_FILE_DIR);
 log.info('Cache folder:', CACHE_FOLDER_DIR);
 log.info('User data file:', USER_DATA_FILE_DIR);
+
+// Initialize language settings
+initializeLanguage();
+
+// Initialize theme settings
+initializeTheme();
 
 function createWindow() {
   // Create the browser window.
@@ -30,10 +39,15 @@ function createWindow() {
     }
   })
 
+  // Create application menu
+  createMenu(mainWindow);
+
+  // Show the window when it's ready
   mainWindow.on('ready-to-show', () => {
     mainWindow.show()
   })
 
+  // Open external links in the default browser
   mainWindow.webContents.setWindowOpenHandler((details) => {
     shell.openExternal(details.url)
     return { action: 'deny' }
