@@ -23,16 +23,10 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: '22'
-          
+
       - name: Install dependencies
         run: npm install
 
-      - name: Install Snapcraft
-        if: matrix.os == 'ubuntu-24.04-arm'
-        run: |
-          sudo snap install snapcraft --classic
-          sudo snap install multipass --classic
-        
       - name: Build for Windows
         if: matrix.os == 'windows-latest'
         run: npm run build:win
@@ -42,9 +36,13 @@ jobs:
         run: npm run build:mac
         
       - name: Build for Linux
-        if: startsWith(matrix.os, 'ubuntu')
+        if: startsWith(matrix.os, 'ubuntu') && matrix.os != 'ubuntu-24.04-arm'
         run: npm run build:linux
-        
+
+      - name: Build for Linux ARM
+        if: matrix.os == 'ubuntu-24.04-arm'
+        run: npm run build:arm
+
       - name: Upload artifacts
         uses: actions/upload-artifact@v4
         with:
