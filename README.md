@@ -134,3 +134,22 @@ This will trigger the GitHub Actions workflow to build and publish the release w
     ```bash
     GITHUB_TOKEN=your_github_personal_access_token
     ```
+
+# Template Features
+
+## Icon
+
+To configure the application icon, replace the `icon.png` file in the `resources` folder. 
+
+## Update Checking
+
+The template includes an automatic update checking system that works as follows:
+
+1. When the application starts, it connects to the versions repository specified in `package.json` (if not null)
+2. It checks if a newer version is available by comparing the current version with the latest release
+3. If an update is available, a popup notification appears informing the user
+4. The popup provides a link that redirects the user to the GitHub releases page
+
+**Note:** Automatic updates that download and install without user intervention are not yet supported. Users must manually download the new version from the releases page.
+
+To disable update checking, set the `versions_repository` or `repository` field in `package.json` to `null`.
