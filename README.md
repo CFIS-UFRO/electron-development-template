@@ -64,8 +64,8 @@ Electron addresses these challenges by leveraging the strengths of web technolog
 # Getting Started
 
 1. Make sure you have Node.js and git installed.
-2. Download the contents of this repository.
-3. Create a folder for your project (it can be a repository) and copy the contents of this repository into it.
+2. Generate a new repository from this template through GitHub: Use this template -> Create a new repository.
+3. Clone your repository.
 4. Copy your icon file in `.png` format to the `resources` folder and name it `icon.png`.
 5. Modify the following fields in `package.json`:
 
@@ -87,8 +87,9 @@ productName: Your Application Name # User-friendly name
 win:
    executableName: yourappname     # Change to your app name in kebab-case (for macOS and Linux it is automatically generated)
 ```
-7. Install dependencies: `npm install`
-8. Start the application: `npm run start`
+7. If you will use the `publish` script (see next section), and the repository is private, remove `ubuntu-24.04-arm` from the file `.github/workflows/release.yml`, it is not supported by GitHub Actions for private repositories.
+8. Install dependencies: `npm install`
+9. Start the application: `npm run start`
 
 # Building and Publishing
 
