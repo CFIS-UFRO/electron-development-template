@@ -29,7 +29,9 @@ jobs:
 
       - name: Install Snapcraft
         if: matrix.os == 'ubuntu-24.04-arm'
-        run: sudo -y snap install snapcraft multipass --classic
+        run: |
+          sudo snap install snapcraft --classic
+          sudo snap install multipass --classic
         
       - name: Build for Windows
         if: matrix.os == 'windows-latest'
