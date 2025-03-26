@@ -39,3 +39,88 @@ Electron addresses these challenges by leveraging the strengths of web technolog
 * Visual Capabilities: HTML, CSS, and JavaScript have evolved to excel at visual presentation, making them ideal for complex data visualization, real-time graphs, and interactive interfaces – common requirements in scientific environments.
 * Ease of Distribution: Electron applications can be packaged into self-contained executables, simplifying distribution and installation for end-users. No need to worry about Python installations or dependency conflicts.
 * Cross-Platform Compatibility: Electron's cross-platform nature allows you to build applications that run seamlessly on multiple operating systems from a single codebase.
+
+# Repository Structure
+
+```
+/
+├── src/                     # Application source code
+│   ├── main/                # Main process (Electron backend)
+│   ├── preload/             # Preload scripts (communication bridge)
+│   └── renderer/            # Renderer process (Svelte frontend)
+│       ├── src/             # Frontend application code
+│       ├── assets/          # Frontend static assets
+│       ├── components/      # Reusable UI components
+│       ├── App.svelte       # Main Svelte component
+│       ├── main.js          # Frontend entry point
+│       └── index.html       # HTML template
+├── resources/               # Application resources and assets
+├── electron.vite.config.mjs # Electron-Vite configuration
+├── svelte.config.mjs        # Svelte configuration
+├── package.json             # Project dependencies and scripts
+└── README.md                # Project documentation
+```
+
+# Getting Started
+
+1. Make sure you have Node.js and git installed.
+2. Download the contents of this repository.
+3. Create a folder for your project (it can be a repository) and copy the contents of this repository into it.
+4. Copy your icon file in `.png` format to the `resources` folder and name it `icon.png`.
+5. Modify the following fields in `package.json`:
+
+```json
+{
+  "name": "your-app-name",              // Use kebab-case for the package name
+  "appName": "Your Application Name",   // User-friendly name
+  "description": "Brief description of your application",
+  "author": "Jane Doe <jane@example.com>, John Smith <john@example.com>", // Authors
+  "port": 3000,                          // Port for the API server
+  "repository": "https://github.com/yourusername/your-repo",  // Your code repository
+}
+```
+6. Modify the following fields in `electron-builder.yml`:
+
+```yaml
+addId: com.example.yourappname     # Change to your domain and app name
+productName: Your Application Name # User-friendly name
+publish:                 # Set it to null if you don't want to publish releases / search for updates
+    owner: yourusername  # GitHub username
+    repo: your-repo      # Repository name
+    private: false       # Set to true if the repository is private
+```
+7. Install dependencies: `npm install`
+8. Start the application: `npm run start`
+
+# Building and Publishing
+
+## Build Options
+
+You have the following commands to build the app:
+
+```bash
+npm run build:mac     # Build the app for macOS
+npm run build:win     # Build the app for Windows
+npm run build:linux   # Build the app for Linux
+```
+
+Although you can build the app for any specific platform, better results are obtained if you compile for your own platform. 
+
+## Publishing a Github Release
+
+The template uses GitHub Actions to automate the build and release process. When you push a new tag starting by `v` to the repository, the workflow will automatically build the application for all platforms and publish the release assets in Github Releases.
+
+The `publish` script automates the process with the following steps:
+
+1. Increments the version number in `package.json` using the format `YYYY.MM.DD.X` 
+   (where X is the release number for the current day, starting at 0)
+2. Generates a GitHub tag for the new version
+3. Pushes the changes to the repository
+
+To run it, use the following command:
+
+```bash
+npm run publish
+```
+
+This will trigger the GitHub Actions workflow to build and publish the release with executables for all platforms.
