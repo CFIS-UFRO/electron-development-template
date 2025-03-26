@@ -84,10 +84,8 @@ Electron addresses these challenges by leveraging the strengths of web technolog
 ```yaml
 addId: com.example.yourappname     # Change to your domain and app name
 productName: Your Application Name # User-friendly name
-publish:                 # Set it to null if you don't want to publish releases / search for updates
-    owner: yourusername  # GitHub username
-    repo: your-repo      # Repository name
-    private: false       # Set to true if the repository is private
+win:
+   executableName: yourappname     # Change to your app name in kebab-case (for macOS and Linux it is automatically generated)
 ```
 7. Install dependencies: `npm install`
 8. Start the application: `npm run start`
