@@ -10,5 +10,11 @@ export default defineConfig({
   },
   renderer: {
     plugins: [svelte()]
+  },
+  build: {
+    lib: {
+      formats: ['es'],
+      // ...
+    }
   }
 })

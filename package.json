@@ -8,6 +8,7 @@
   "repository": "https://github.com/CFIS-UFRO/electron-development-template-2",
   "versions_repository": "https://github.com/CFIS-UFRO/versions",
   "version": "2025.3.26.10",
+  "type": "module",
   "scripts": {
     "format": "prettier --plugin prettier-plugin-svelte --write .",
     "lint": "eslint --cache .",
@@ -23,7 +24,9 @@
   },
   "dependencies": {
     "@electron-toolkit/preload": "^3.0.1",
-    "@electron-toolkit/utils": "^4.0.0"
+    "@electron-toolkit/utils": "^4.0.0",
+    "electron-log": "^5.3.3",
+    "electron-store": "^10.0.1"
   },
   "devDependencies": {
     "@electron-toolkit/eslint-config": "^2.0.0",
