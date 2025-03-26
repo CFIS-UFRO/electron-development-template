@@ -1,5 +1,6 @@
 appId: com.cfis.electron-development-template
 productName: Electron Development Template
+icon: resources/icon.png
 directories:
   buildResources: build
 files:
