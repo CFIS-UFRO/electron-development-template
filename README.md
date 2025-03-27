@@ -2,6 +2,8 @@
 
 Template to develop GUI applications based on Electron.
 
+![Application Screenshot](resources/screenshot.png)
+
 # Releases
 
 You can find the latest releases [here](https://github.com/CFIS-UFRO/electron-development-template/releases).
