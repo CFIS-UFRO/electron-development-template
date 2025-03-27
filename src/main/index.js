@@ -7,6 +7,7 @@ import { LOG_FILE_DIR, CACHE_FOLDER_DIR, USER_DATA_FILE_DIR } from './utils/path
 import { createMenu } from './menu.js';
 import { initializeLanguage } from './utils/lang.js'
 import { initializeTheme } from './utils/theme.js'
+import packageJson from '../../package.json'
 
 // Configure logging
 log.errorHandler.startCatching();
@@ -18,6 +19,11 @@ log.info('Starting the app...');
 log.info('Log file:', LOG_FILE_DIR);
 log.info('Cache folder:', CACHE_FOLDER_DIR);
 log.info('User data file:', USER_DATA_FILE_DIR);
+
+// Expose repo URL to renderer
+ipcMain.on('get-repo', (event) => {
+  event.returnValue = packageJson.repository;
+});
 
 function createWindow() {
   // Create the browser window.

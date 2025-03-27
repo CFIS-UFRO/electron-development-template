@@ -1,4 +1,4 @@
-import { nativeTheme } from 'electron';
+import { nativeTheme, ipcMain, BrowserWindow } from 'electron';
 import Store from 'electron-store';
 import log from 'electron-log';
 
@@ -46,6 +46,7 @@ export function setTheme(theme) {
     log.info(`Setting theme to: ${theme}`);
     store.set('theme', theme);
     nativeTheme.themeSource = theme;
+    BrowserWindow.getAllWindows()[0].webContents.send('theme-changed', theme);
     return true;
   }
   return false;
@@ -56,8 +57,13 @@ export function setTheme(theme) {
  * @returns {string} The initialized theme
  */
 export function initializeTheme() {
+  // Set current theme
   const currentTheme = getCurrentTheme();
   setTheme(currentTheme);
+  // Init a listener to get the current theme
+  ipcMain.on('get-theme', (event) => {
+    event.returnValue = getEffectiveTheme();
+  });
   return currentTheme;
 }
 
