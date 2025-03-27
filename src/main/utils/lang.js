@@ -12,7 +12,7 @@ const store = new Store();
 
 // Automatically detect supported languages from locale files
 export const supportedLanguages = [];
-const localesPath = path.join(APP_FOLDER_DIR, 'src/main/assets/locales');
+const localesPath = path.join(APP_FOLDER_DIR, 'resources/locales');
 
 try {
     fs.readdirSync(localesPath)
