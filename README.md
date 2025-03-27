@@ -205,3 +205,48 @@ Logs are automatically saved to:
 - Windows: `%USERPROFILE%\AppData\Roaming\[app name]\logs\`
 - macOS: `~/Library/Logs/[app name]/`
 - Linux: `~/.config/[app name]/logs/`
+
+# Internationalization (i18n)
+
+This template uses two different internationalization strategies:
+- **Main Process**: i18next
+- **Renderer Process**: svelte-i18n
+
+## Main Process Localization
+
+The main process uses i18next for translations.
+
+```javascript
+import { t } from 'i18next';
+
+// Usage example
+const translatedText = t('key');
+```
+
+Translation files are located in:
+```
+src/main/assets/locales/
+```
+
+## Renderer Process Localization
+
+The renderer process uses svelte-i18n for translations.
+
+```javascript
+import { _ } from 'svelte-i18n';
+
+// Usage in .js files
+const translatedText = get(_)('key');
+
+// Usage in .svelte files
+<p>{$_('key')}</p>
+```
+
+Translation files are located in:
+```
+src/renderer/src/assets/locales/
+```
+
+## Adding New Languages
+
+To add support for new languages, simply add new JSON files to the appropriate locales directories. Each language should have its own file with the language code as the filename (e.g., `fr.json`, `de.json`).
