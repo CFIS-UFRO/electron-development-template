@@ -5,7 +5,7 @@
   "main": "./out/main/index.js",
   "author": "Bryan Casanelli <bryancasanelli@gmail.com>",
   "port": 9826,
-  "repository": "https://github.com/CFIS-UFRO/electron-development-template-2",
+  "repository": "https://github.com/CFIS-UFRO/electron-development-template",
   "versions_repository": "https://github.com/CFIS-UFRO/versions",
   "version": "2025.3.26.10",
   "type": "module",

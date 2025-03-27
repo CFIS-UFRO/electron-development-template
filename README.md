@@ -1,4 +1,4 @@
-# Electron Development Template 2
+# Electron Development Template
 
 Template to develop GUI applications based on Electron.
 
