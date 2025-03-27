@@ -258,3 +258,121 @@ The template includes built-in theme support with three options:
 - Light theme
 - Dark theme
 - System theme (follows the user's operating system preference)
+
+## Style
+
+This template uses Tailwind CSS for styling components, with built-in dark mode support.
+
+### Usage
+
+Tailwind classes are applied directly to HTML elements:
+
+```html
+<!-- Basic styling -->
+<div class="text-center p-4 rounded-lg">
+  <h1 class="text-4xl font-bold">Heading</h1>
+</div>
+
+<!-- Dark mode support -->
+<div class="bg-white dark:bg-gray-800 text-black dark:text-white">
+  Dark mode compatible content
+</div>
+```
+
+### Dark Mode
+
+The `dark:` prefix creates styles that only apply when dark mode is active:
+
+```html
+<!-- Text that changes color in dark mode -->
+<p class="text-neutral-800 dark:text-neutral-300">
+  This text is dark in light mode and light in dark mode
+</p>
+
+<!-- Buttons with dark mode styling -->
+<button class="bg-neutral-200 hover:bg-neutral-300 dark:bg-neutral-700 dark:hover:bg-neutral-600">
+  Adaptive Button
+</button>
+
+<!-- Borders that change in dark mode -->
+<div class="border border-gray-200 dark:border-gray-700">
+  Container with adaptive border
+</div>
+```
+
+
+## Icons
+
+This template uses Iconify for icon management, providing access to thousands of icons from different collections.
+
+### Usage
+
+In your Svelte components:
+
+```javascript
+<script>
+  import Icon from '@iconify/svelte';
+  import codeBraces from '@iconify/icons-mdi/code-braces';
+  import github from '@iconify/icons-mdi/github';
+</script>
+
+<!-- Basic usage -->
+<Icon icon={codeBraces} class="w-8 h-8" />
+
+<!-- With styling -->
+<Icon 
+  icon={github} 
+  class="text-neutral-700 dark:text-neutral-300" 
+  width="20" 
+  height="20" 
+/>
+```
+
+## Main Window Menu
+
+The application features a comprehensive menu system organized into logical categories for easy navigation:
+
+- **File**:
+  - Open logs folder
+  - Open user preferences folder
+  - Open cache folder
+  - Check for updates (only if versions repository and main repository are defined)
+  - Quit application
+  
+- **Edit**:
+  - Standard editing operations (Undo, Redo)
+  - Clipboard functions (Cut, Copy, Paste, Delete)
+  - Text selection (Select All)
+  
+- **View**:
+  - Window refresh options (Reload, Force Reload)
+  - Developer Tools toggle
+  - Zoom controls (Reset Zoom, Zoom In, Zoom Out)
+  - Fullscreen toggle
+  
+- **Settings**:
+  - Language selection
+  - Theme options (Light, Dark, System)
+  
+- **About**:
+  - Open repository link (only if main repository is defined)
+  - Open releases page (only if main repository is defined)
+  - View author information
+  - Application information
+
+## API
+
+If you configure a port in the `package.json` file, the application will start an API server on that port.
+
+This template uses by default the port 9826 and exposes thw following two test endpoints:
+
+- `GET /info`: Returns a JSON object with the application name:
+    ```json
+    {
+      "appName": "electron-development-template"
+    }
+    ```
+
+You can test the API by running the application and accessing to `http://localhost:9826/api`.
+
+You can expose more endpoints by modifying the `src/main/api-server.js` file.
