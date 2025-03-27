@@ -7,7 +7,7 @@
   "port": 9826,
   "repository": "https://github.com/CFIS-UFRO/electron-development-template",
   "versions_repository": "https://github.com/CFIS-UFRO/versions",
-  "version": "2025.3.27.0",
+  "version": "2025.3.27.1",
   "type": "module",
   "scripts": {
     "format": "prettier --plugin prettier-plugin-svelte --write .",
