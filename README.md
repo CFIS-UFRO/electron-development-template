@@ -376,3 +376,103 @@ This template uses by default the port 9826 and exposes thw following two test e
 You can test the API by running the application and accessing to `http://localhost:9826/api`.
 
 You can expose more endpoints by modifying the `src/main/api-server.js` file.
+
+# A brief note about Electron architecture
+
+A critical aspect of Electron development is understanding the separation between **Main process** and **Renderer process**:
+
+- **Main Process**: Runs Node.js and has full access to the operating system
+- **Renderer Process**: Runs web content in Chromium and has limited system access
+- **Preload Scripts**: Create a secure bridge between the two processes
+
+This separation is crucial for security. Direct communication between processes is not allowed; instead, a bridge must be established through preload scripts using Electron's IPC (Inter-Process Communication) system.
+
+This template already includes a configured `preload` script that establishes a secure bridge between processes. The preload exposes a limited API via `contextBridge` that allows the renderer process to access specific IPC functions without exposing the entire Node.js environment.
+
+While the preload script is already configured, you still need to implement the appropriate IPC listeners and emitters in both the main and renderer processes to enable communication. The following patterns demonstrate how to establish these communication channels.
+
+## IPC Communication Patterns
+
+### Main → Renderer (One-way)
+
+When the Main process needs to notify the Renderer without expecting a response:
+
+**Main Process**:
+```javascript
+// Send data to the main window
+BrowserWindow.getAllWindows()[0].webContents.send('theme-changed', lang);
+// or
+mainWindow.webContents.send('theme-changed', lang);
+```
+
+**Renderer Process**:
+```javascript
+// Set up listener in renderer
+window.electron.ipcRenderer.on('theme-changed', (event, theme) => {
+    document.documentElement.setAttribute('class', theme);
+});
+```
+
+### Renderer → Main (With Synchronous Response)
+
+When the Renderer needs immediate data from the Main process:
+
+**Renderer Process**:
+```javascript
+// Synchronous request - blocks until response is received
+const currentTheme = window.electron.ipcRenderer.sendSync('get-theme');
+```
+
+**Main Process**:
+```javascript
+// Synchronous handler with immediate response
+ipcMain.on('get-theme', (event) => {
+    event.returnValue = getEffectiveTheme();
+});
+```
+
+### Renderer → Main (One-way, No Response)
+
+When the Renderer sends data to the Main process without expecting a response:
+
+**Renderer Process**:
+```javascript
+// Send data to main process
+window.electron.ipcRenderer.send('log-action', {
+    action: 'settings-changed',
+    timestamp: Date.now()
+});
+```
+
+**Main Process**:
+```javascript
+// Handle received data
+ipcMain.on('log-action', (event, actionData) => {
+    logger.info('Action logged:', actionData);
+});
+```
+
+### Renderer → Main (With Asynchronous Response)
+
+For non-blocking requests with response callbacks:
+
+**Renderer Process**:
+```javascript
+// Send request
+window.electron.ipcRenderer.send('get-user-data');
+
+// Listen for response
+window.electron.ipcRenderer.on('user-data-response', (event, data) => {
+    updateUserInterface(data);
+});
+```
+
+**Main Process**:
+```javascript
+// Handle request and send response
+ipcMain.on('get-user-data', (event) => {
+    const userData = getUserData();
+    event.sender.send('user-data-response', userData);
+});
+```
+
