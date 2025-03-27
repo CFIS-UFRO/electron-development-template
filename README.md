@@ -71,12 +71,12 @@ Key repository directories:
 
 ```json
 {
-   "name": "your-app-name",               // Lowercase with hyphens only
-   "appName": "Your Application Name",    // Display name
-   "description": "Brief description",    // What your app does
-   "author": "Name <email@domain.com>",   // Your contact info (multiple authors can be added separated by comma)
-   "version": "YYYY.MM.DD.0",             // Version of the app, auto-updated by the publish script
-   "port": 3000,                          // Port for the app API
+   "name": "your-app-name",                 // Lowercase with hyphens only
+   "productName": "Your Application Name",  // Display name
+   "description": "Brief description",      // What your app does
+   "author": "Name <email@domain.com>",     // Your contact info (multiple authors can be added separated by comma)
+   "version": "YYYY.MM.DD.0",               // Version of the app, auto-updated by the publish script
+   "port": 3000,                            // Port for the app API
    "repository": "https://github.com/username/repo",         // Your code repository
    "versions_repository": "https://github.com/username/repo" // For updates checking, can be the same as repository
 }

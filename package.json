@@ -1,6 +1,6 @@
 {
   "name": "electron-development-template",
-  "appName": "Electron Development Template",
+  "productName": "Electron Development Template",
   "description": "Template to develop GUI apps based on Electron",
   "main": "./out/main/index.js",
   "author": "Bryan Casanelli <bryancasanelli@gmail.com>",
