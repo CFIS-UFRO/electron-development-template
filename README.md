@@ -206,13 +206,13 @@ Logs are automatically saved to:
 - macOS: `~/Library/Logs/[app name]/`
 - Linux: `~/.config/[app name]/logs/`
 
-# Internationalization (i18n)
+## Internationalization (i18n)
 
 This template uses two different internationalization strategies:
 - **Main Process**: i18next
 - **Renderer Process**: svelte-i18n
 
-## Main Process Localization
+### Main Process Localization
 
 The main process uses i18next for translations.
 
@@ -228,7 +228,7 @@ Translation files are located in:
 src/main/assets/locales/
 ```
 
-## Renderer Process Localization
+### Renderer Process Localization
 
 The renderer process uses svelte-i18n for translations.
 
@@ -247,6 +247,14 @@ Translation files are located in:
 src/renderer/src/assets/locales/
 ```
 
-## Adding New Languages
+### Adding New Languages
 
 To add support for new languages, simply add new JSON files to the appropriate locales directories. Each language should have its own file with the language code as the filename (e.g., `fr.json`, `de.json`).
+
+## Theme 
+
+The template includes built-in theme support with three options:
+
+- Light theme
+- Dark theme
+- System theme (follows the user's operating system preference)
