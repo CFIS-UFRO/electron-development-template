@@ -19,12 +19,6 @@ log.info('Log file:', LOG_FILE_DIR);
 log.info('Cache folder:', CACHE_FOLDER_DIR);
 log.info('User data file:', USER_DATA_FILE_DIR);
 
-// Initialize language settings
-initializeLanguage();
-
-// Initialize theme settings
-initializeTheme();
-
 function createWindow() {
   // Create the browser window.
   const mainWindow = new BrowserWindow({
@@ -38,6 +32,12 @@ function createWindow() {
       sandbox: false
     }
   })
+
+  // Initialize language settings
+  initializeLanguage();
+
+  // Initialize theme settings
+  initializeTheme();
 
   // Create application menu
   createMenu(mainWindow);
