@@ -20,7 +20,7 @@ This removes the quarantine flag that blocks unidentified developer apps.
 
 # Origin of this Template
 
-This template was created to streamline development of scientific applications for hardware control and data analysis. While we previously used Python with QT, we've transitioned to Electron for its improved performance, visualization capabilities, and easier distribution.
+This template was developed to enhance the development of scientific applications in our laboratory, particularly for hardware control and data analysis. While our previous standard involved Python with QT, this new Electron-based template is being introduced as a recommended alternative. It has significant advantages in performance, visualization capabilities, and simplified application distribution compared to the previous approach based on Python. Anyway, for scripting and fast prototyping, Python is still a great choice.
 
 # What is Electron?
 
@@ -38,7 +38,7 @@ While Python with QT is popular for desktop apps, it has significant drawbacks:
 Electron solves these issues by:
 
 * Utilizing powerful web technologies (HTML/CSS/JavaScript) for better visualization
-* Providing self-contained executables that don't need runtime installation
+* Providing self-contained executables that don't need dependency installation
 * Ensuring consistent behavior across Windows, macOS, and Linux
 * Offering superior performance for UI-heavy applications such as data visualization
 
