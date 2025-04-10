@@ -20,29 +20,41 @@ This removes the quarantine flag that blocks unidentified developer apps.
 
 # Origin of this Template
 
-This template was developed to enhance the development of scientific applications in our laboratory, particularly for hardware control and data analysis. While our previous standard involved Python with QT, this new Electron-based template is being introduced as a recommended alternative. It has significant advantages in performance, visualization capabilities, and simplified application distribution compared to the previous approach based on Python. Anyway, for scripting and fast prototyping, Python is still a great choice.
+Developing applications with graphical user interfaces (GUIs) is a common task in our laboratory, often needed for hardware control and data analysis projects.
+
+To make these developments easier and more consistent, we developed standard project templates. This repository contains the template designed for building GUI applications using Electron and web technologies.
+
+For those who prefer or require Python for their GUI applications, we also provide a specific template based on Python and Qt, available at: https://github.com/CFIS-UFRO/python-qt-development-template.
+
+# When to Choose This Template
+
+This template is a good choice for projects that require a graphical interface with significant visual customization, needing specific designs or detailed control beyond standard components. It is also well-suited when the application needs to be distributed outside the lab as an easy-to-install executable for end-users.
+
+**Advantages and Considerations**
+
+The main advantages of this template are the **flexibility in visual design** provided by HTML/CSS and the ability to generate **self-contained executables**, simplifying distribution.
+
+However, it's important to note that this involves working with web technologies (JavaScript, HTML, CSS) and related frameworks. If the development team's experience is primarily in other languages, the **initial learning curve might be steeper** compared to more traditional environments used in scientific fields.
+
+**Alternative for Simpler Projects or Internal Use**
+
+If the project requires a simpler interface, is intended primarily for internal lab use, or if the development team prefers to work with languages and frameworks more commonly used in scientific areas, the template based on Python and Qt is a recommended alternative: 
+https://github.com/CFIS-UFRO/python-qt-development-template.
 
 # What is Electron?
 
 Electron is a framework for building cross-platform desktop applications with web technologies (HTML, CSS, JavaScript). It combines Chromium for rendering and Node.js for backend capabilities, enabling native desktop apps that run on Windows, macOS, and Linux. This makes it ideal for creating powerful applications with modern web interfaces and native system access.
 
-## Why Electron over Python?
+## Why Electron?
 
-While Python with QT is popular for desktop apps, it has significant drawbacks:
+Electron simplifies building desktop applications using web technologies. Its key strengths are:
 
-* Performance bottlenecks with intensive computations and real-time visualization
-* Limited modern UI capabilities compared to web technologies 
-* Complex distribution requiring Python installation and dependency management
-* Cross-platform inconsistencies in UI rendering and behavior
+* **Attractive and Functional User Interfaces:** Allows to create interfaces using HTML, CSS, and JavaScript. Ideal for applications with detailed graphics or interactive elements with a modern look and feel.
+* **Simple Distribution:** Packages the application as a single executable file. Users can run it directly without installing additional components or worrying about dependencies.
+* **Cross-Platform:** Allows the application to look and function similarly across Windows, macOS, and Linux.
+* **Good UI Performance:** It's designed to handle interfaces with high graphics requirements and frequent updates efficiently, keeping the application smooth and responsive.
 
-Electron solves these issues by:
-
-* Utilizing powerful web technologies (HTML/CSS/JavaScript) for better visualization
-* Providing self-contained executables that don't need dependency installation
-* Ensuring consistent behavior across Windows, macOS, and Linux
-* Offering superior performance for UI-heavy applications such as data visualization
-
-The combination of Chromium and Node.js in Electron delivers a more robust solution for modern desktop applications compared to Python-based alternatives.
+These features make Electron a practical and powerful option for creating modern, cross-platform desktop applications.
 
 # Repository Structure
 
